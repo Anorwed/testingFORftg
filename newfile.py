@@ -59,11 +59,9 @@ class DuckDuckGoSearchMod(loader.Module):
             except YouBlockedUserError:
                 await event.reply('<code>Разблокируй @duckSearch_bot</code>')
                 return
-                x = await message.client.send_message(chat, emoji)
-					await (await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))).delete()
-					await x.delete()
-                if reply_and_text:
-                     await event.client.send_message(event.chat_id, response.message,
+            await event.delete()
+            if reply_and_text:
+                await event.client.send_message(event.chat_id, response.message,
                                                 reply_to=reply_message.id)
-                     else:
-                          await event.client.send_message(event.chat_id, response.message)
+            else:
+                await event.client.send_message(event.chat_id, response.message)
